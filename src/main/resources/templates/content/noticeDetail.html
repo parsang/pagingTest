@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
+    <th:block layout:fragment="head">
+        <title>noticeDetail</title>
+        <!--/* css */-->
+        <link th:href="@{/css/common.css}" rel="stylesheet" />
+    </th:block>
+
+    <body>
+		<div class="noticeDetailContainer">
+			<h2>게시글 상세 페이지</h2>
+			<div th:each="noticeOne : ${noticeListOne}" class="noticeDetailbox">
+				<div class="noticeDetailHeaderBox">
+					<div class="noticeDetailHeader1">
+						<p th:text="${noticeOne.noticeTitle}" class="noticeDetailTitle"></p>
+					</div>
+					<div class="noticeDetailHeader2">
+						<p th:text="'작성자 : ' + ${noticeOne.memberId}" class="noticeDetailId"></p>
+						<p th:text="'작성일 : ' + ${noticeOne.noticeWriteTime}" class="noticeDetailWriteTime"></p>
+						<p th:text="'조회수 : ' + ${noticeOne.noticeView}" class="noticeDetailView"></p>
+					</div>
+				</div>
+				<div class="noticeDetailBody">
+					<div class="noticeDetailContext">
+						<p th:text="${noticeOne.noticeContext}"></p>
+					</div>
+				</div>
+				<div class="noticeDetailFoot">
+					<button onclick="noticeHome()">게시글 이동</button>
+			        <button th:onclick="|UpdateNotice('${noticeListOne.noticeNumber}')|">수정</button>
+			        <button th:onclick="|DeleteNotice('${noticeListOne.noticeNumber}')|">삭제</button>
+				</div>
+			</div>
+		</div>
+		
+        <script>
+            function noticeHome() {
+                window.location.href = '/noticeLists/1';
+            };
+            
+            function UpdateNotice(noticeNumber) {
+                window.location.href = '/noticeUpdate/' + noticeNumber;
+            };
+            
+            function DeleteNotice(noticeNumber) {
+				if(confirm("게시글을 삭제하시겠습니까?")){
+					console.log(noticeNumber)
+        			window.location.href = '/noticeDelete/' + noticeNumber;
+            	}
+            };
+        </script>
+    </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    
+    <th:block layout:fragment="head">
+    	<title>noticeList</title>
+		
+        <!--/* css */-->
+        <link th:href="@{/css/common.css}" rel="stylesheet" />
+    </th:block>
+    <body>
+		<div class="noticeListContainer">
+            <div class="noticeListBox">
+                <div class="noticeListSearchBox">
+                    <input type="text">
+                    <button>검색</button>
+                    <div class="noticeListWrite">
+                        <button onclick="noticeWrite()">글 쓰기</button>
+                    </div>
+                </div>
+                <div>
+                    <div class="noticeListHeader">
+                        <p class="noticeListNumber">번호</p>
+                        <p class="noticeListTitle">공지사항</p>
+                        <p class="noticeListUser">작성자</p>
+                        <p class="noticeListDate">작성일</p>
+                        <p class="noticeListViews">조회수</p>
+                    </div>
+                    <!-- 글 반복문 -->
+                    <div th:each="notice : ${noticeList}" class="noticeListBody">
+                        <p th:text="${ notice.noticeNumber }" class="noticeListNumber"></p>
+                        <a th:href="@{/notice/{noticeNumber}(noticeNumber=${notice.noticeNumber})}" class="noticeListTitle">
+							<p th:text="${notice.noticeTitle}"></p>
+						</a>
+                        <p th:text="${ notice.memberId }" class="noticeListUser"></p>
+                        <p th:text="${ notice.noticeWriteTime.substring(0, 10) }" class="noticeListDate"></p>
+                        <p th:text="${ notice.noticeView }" class="noticeListViews"></p>
+                    </div>
+                    <div class="noticeListFoot">
+						<button>이전</button>
+						<span>1</span>
+						<span>2</span>
+						<span>3</span>
+						<span>4</span>
+						<span>5</span>
+						<button>다음</button>
+					</div>
+                </div>
+            </div>
+        </div>
+				   	
+	   	<script>
+			function mainHome(){
+				window.location.href = '/home';
+			};
+			
+			function noticeWrite(){
+				window.location.href = '/notice/write';
+			};
+		</script>
+    </body>
+</html>

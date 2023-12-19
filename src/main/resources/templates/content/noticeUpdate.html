@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
+    <th:block layout:fragment="head">
+        <title>noticeUpdate</title>
+        <!--/* css */-->
+        <link th:href="@{/css/common.css}" rel="stylesheet" />
+    </th:block>
+
+    <body>
+		<form th:action="@{/notice/write/update}" th:object="${noticeListOne}" method="post">
+			<div class="noticeDetailContainer">
+				<h2>게시글 수정 페이지</h2>
+				<div class="noticeDetailbox">
+					<div class="noticeDetailHeaderBox">
+						<div class="noticeDetailHeader1">
+							<input type="hidden" th:field="*{noticeNumber}" th:value="${noticeListOne.noticeNumber}"></input>
+							<input type="text" th:field="*{noticeTitle}" th:value="${noticeListOne.noticeTitle}" placeholder="글제목"></input>
+						</div>
+						<div class="noticeDetailHeader2">
+							<!-- 작성자 나중에 수정 -->
+							<p class="noticeDetailId">작성자 : admin</p>
+							<p th:text="'수정일 : ' + ${currentTime}" class="noticeDetailWriteTime"></p>
+						</div>
+					</div>
+					<div class="noticeDetailBody">
+						<div class="noticeDetailContext">
+							<textarea th:field="*{noticeContext}" th:value="${noticeListOne.noticeContext}" placeholder="글내용"></textarea>
+						</div>
+					</div>
+					<div class="noticeDetailFoot">
+						<button type="submit">수정완료</button>
+						<input type="button" value="게시글 이동" onclick="noticeLists()">
+					</div>
+				</div>
+			</div>
+		</form>
+        <script>
+            function noticeLists() {
+                window.location.href = '/noticeLists/1';
+            };
+        </script>
+    </body>
+</html>
