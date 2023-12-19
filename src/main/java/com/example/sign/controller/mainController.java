@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,11 +33,11 @@ public class mainController {
 		this.pagingModel = pagingModel;
 	}
 	
-	// 페이지 접속시 /home 경로로 이동
-//	@RequestMapping("/")
-//	public String home() {
-//	    return "redirect:/home";
-//	}
+	// 페이지 접속시 /noticeLists/1 경로로 이동
+	@RequestMapping("/")
+	public String home() {
+	    return "redirect:/noticeLists/1";
+	}
 
 //  @RequestMapping : method 속성을 생략하면 GET, POST, PUT, DELETE 등 모든 HTTP 메서드에 대한 요청을 처리
 //  @GetMapping, @PostMapping등을 사용하는 이유는 메서드의 용도가 명시적으로 드러나기 때문에 코드의 가독성이 좋아진다.
